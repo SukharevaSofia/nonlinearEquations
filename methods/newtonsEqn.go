@@ -15,7 +15,7 @@ func NewtonsEqn(f func(x float64) float64, a, b float64, acc int) (float64, floa
 	if math.Abs(f(x)) > math.Pow(10, -accuracy) &&
 		math.Abs(x-x0) > math.Pow(10, -accuracy) &&
 		math.Abs(f(x)/d(x)) > math.Pow(10, -accuracy) {
-		return x, f(x), 0
+		return x, f(x), 1
 	} else {
 		for {
 			x0 = x

@@ -13,7 +13,6 @@ import (
 
 const dx = 0.000001
 
-// считает производную
 func derive(f func(x float64) float64) func(x float64) float64 {
 	return func(x float64) float64 {
 		return (f(x+dx) - f(x)) / dx

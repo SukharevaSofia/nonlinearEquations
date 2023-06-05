@@ -5,6 +5,7 @@ type SysOfEqn struct {
 	Second       func(x, y float64) float64
 	FirstYfromX  func(x float64) (float64, float64)
 	SecondYfromX func(x float64) (float64, float64)
+
 	AnswX, AnswY float64
 }
 

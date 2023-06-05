@@ -62,7 +62,6 @@ func main() {
 			return s1[1][0]*x*x + s1[1][1] - s1[1][2]*y
 		}
 		sysEq.FirstYfromX = func(x float64) (float64, float64) {
-			//return math.Sqrt(s1[0][2] - s1[0][0]*x*x), -math.Sqrt(s1[0][2] - s1[0][0]*x*x)
 			return math.Sqrt(4 - x*x), -math.Sqrt(4 - x*x)
 		}
 		sysEq.SecondYfromX = func(x float64) (float64, float64) {
@@ -96,9 +95,13 @@ func main() {
 			sysEq.AnswX, sysEq.AnswY = answx2, answy2
 		}
 	}
-	result, xSys, ySys, _, _, sysIt := methods.NewtonSys(sysEq, x0, y0, accuracy)
+
+	result, xSys, ySys, sysIt := methods.NewtonSys(sysEq, x0, y0, accuracy)
 	fmt.Println(result)
-	fmt.Printf("X: %.3f; Y: %.3f\nНевязки: %.3e; %.3e\n", xSys, ySys, xSys-sysEq.AnswX, ySys-sysEq.AnswY)
+	//answX, answY := sysEq.AnswX, sysEq.AnswY
+
+	fmt.Printf("X: %.3f; Y: %.3f\nЗначения: %.3e; %.3e\n", xSys, ySys,
+		sysEq.First(xSys, ySys), sysEq.Second(xSys, ySys))
 	fmt.Println("Итераций: ", sysIt)
 
 }

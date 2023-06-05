@@ -5,7 +5,8 @@ import (
 	"nonlinearEquations/utils"
 )
 
-func NewtonSys(equations utils.SysOfEqn, x0, y0 float64, acc int) (string, float64, float64, float64, float64, int) {
+func NewtonSys(equations utils.SysOfEqn, x0, y0 float64, acc int) (string, float64, float64, int) {
+
 	accuracy := float64(acc)
 	xGiven, yGiven := x0, y0
 	f := equations.First
@@ -27,7 +28,7 @@ func NewtonSys(equations utils.SysOfEqn, x0, y0 float64, acc int) (string, float
 	result := checkAnswer(x, y, equations.AnswX, equations.AnswY, math.Pow(10, -accuracy))
 
 	ShowSysGraph(xGiven, yGiven, x, y, equations)
-	return result, x, y, dxNew, dyNew, cntOfIterations
+	return result, x, y, cntOfIterations
 }
 
 func getJacobiMatrix(f, g func(x float64, y float64) float64) utils.Matrix {
@@ -59,7 +60,7 @@ func deriveY(f func(x, y float64) float64) func(x, y float64) float64 {
 }
 
 func checkAnswer(x, y, answ1, answ2, accuracy float64) string {
-	if (math.Abs(x-answ1) <= accuracy) && (math.Abs(y-answ2) <= accuracy) {
+	if (math.Abs(math.Abs(x)-answ1) <= accuracy) && (math.Abs(y-answ2) <= accuracy) {
 		return utils.GOOD_SOLUTION
 	} else {
 		return utils.BAD_SOLUTION
